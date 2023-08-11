@@ -2,22 +2,29 @@ package com.finalChallenge.CreditCardSpringAPI.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
-@Document
+@Document("customers")
 public class Customer {
     @Id
-    private int customer_id;
+    @Field("customer_id")
+    private Long customerId;
+
+    @Field("first")
     private String firstName;
+
+    @Field("last")
     private String lastName;
+
     private String gender;
 
     private String job;
     private Date dob;
 
-    public Customer(int customer_id, String firstName, String lastName, String gender, String job, Date dob) {
-        this.customer_id = customer_id;
+    public Customer(Long customer_id, String firstName, String lastName, String gender, String job, Date dob) {
+        this.customerId = customer_id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -25,12 +32,12 @@ public class Customer {
         this.dob = dob;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
     public String getFirstName() {

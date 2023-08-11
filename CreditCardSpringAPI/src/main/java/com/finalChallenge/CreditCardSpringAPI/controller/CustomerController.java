@@ -5,63 +5,57 @@ import java.util.List;
 import com.finalChallenge.CreditCardSpringAPI.exceptions.CustomerNotFoundException;
 import com.finalChallenge.CreditCardSpringAPI.models.Customer;
 import com.finalChallenge.CreditCardSpringAPI.repo.ICustomerRepo;
+import com.finalChallenge.CreditCardSpringAPI.services.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
+@RequestMapping("/customers")
 class CustomerController {
 
-    private final ICustomerRepo repository;
+    @Autowired
+    private CustomerService customerService;
 
-    CustomerController(ICustomerRepo repository) {
-        this.repository = repository;
+
+    @GetMapping
+    List<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/customers")
-    List<Customer> allCustomers() {
-        return repository.findAll();
+    @GetMapping("/{customer_id}")
+    public ResponseEntity<Object> getCustomerById(@PathVariable Long customer_id)
+    {
+        try {
+            System.out.println(customer_id + " Controller Class");
+            Customer customer = this.customerService.getCustomerByID(customer_id);
+            System.out.println(customer);
+            return ResponseEntity.status(HttpStatus.FOUND).body(customer);
+        } catch (CustomerNotFoundException e) {
+            // throw new RuntimeException(e);
+            return ResponseEntity.noContent().build();
+        }
     }
 
-    @PostMapping("/customers")
-    @ResponseStatus(HttpStatus.CREATED)
-    Customer newItem(@RequestBody Customer item) {
-        return repository.save(item);
+    @PostMapping
+    public ResponseEntity<Object> addCustomer(@RequestBody Customer customer)
+    {
+        try {
+            Customer employee1 = this.customerService.insertEmployee(customer);
+            return ResponseEntity.status(HttpStatus.CREATED).body(employee1);
+        } catch (CustomerNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
+        }
     }
-
-    // Single item
-
-    @GetMapping("/customers/{id}")
-    Customer getCustomerByID(@PathVariable Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException(id));
+    @PutMapping
+    public ResponseEntity<Object> updateCustomer(@RequestBody Customer customer)
+    {
+        return null;
     }
-
-    @GetMapping("/itemsrp")
-    Customer getMusicItemrp(@RequestParam(value = "id",
-            defaultValue = "1", required = false) Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException(id));
-    }
-
-    @PutMapping("/items/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    MusicItem updateMusicItem(@RequestBody MusicItem newItem, @PathVariable Long id) {
-        return repository.findById(id)
-                .map(item -> {
-                    item.setName(newItem.getName());
-                    item.setArtist_group(newItem.getArtist_group());
-                    item.setGenre(newItem.getGenre());
-                    return repository.save(item);
-                })
-                .orElseGet(() -> {
-                    newItem.setId(id);
-                    return repository.save(newItem);
-                });
-    }
-
-    @DeleteMapping("/customers/{id}")
-    void deleteCustomerByID(@PathVariable Long id) {
-        repository.deleteById(id);
+    @DeleteMapping("/{customer_id}")
+    public ResponseEntity<Object> deleteCustomerById(@PathVariable Long customer_id)
+    {
+        return null;
     }
 }
