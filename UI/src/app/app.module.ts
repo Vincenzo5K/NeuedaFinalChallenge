@@ -10,6 +10,7 @@ import { EditCardComponent } from './edit-card/edit-card.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
   { path: 'list', component: CardListComponent },
   { path: 'add', component: AddCardComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
     AddCardComponent,
     EditCardComponent,
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+  
   ],
   imports: [
     BrowserModule,
