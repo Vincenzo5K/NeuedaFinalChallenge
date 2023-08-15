@@ -1,0 +1,12 @@
+<div class="card-details">
+    <h2>Card Details</h2>
+    <div *ngIf="card">
+      <p><strong>Card Number:</strong> {{ card.cardNumber }}</p>
+      <p><strong>Cardholder Name:</strong> {{ card.cardholderName }}</p>
+      <p><strong>Expiration Date:</strong> {{ card.expirationDate }}</p>
+      <!-- Add more card details as needed -->
+    </div>
+    <button (click)="editCard()">Edit Card</button>
+    <button (click)="deleteCard()">Delete Card</button>
+  </div>
+  
