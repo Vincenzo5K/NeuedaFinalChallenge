@@ -1,5 +1,6 @@
 <div class="card-form">
     <h2>Add Card</h2>
+    <!-- Form controls for card details -->
     <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
       <!-- Card number input -->
       <label for="cardNumber">Card Number:</label>
@@ -8,25 +9,20 @@
         <div *ngIf="cardForm.controls['cardNumber'].errors['required']">Card number is required.</div>
         <div *ngIf="cardForm.controls['cardNumber'].errors['pattern']">Invalid card number.</div>
       </div>
-      
-      <!-- Cardholder name input -->
-      <label for="cardholderName">Cardholder Name:</label>
-      <input type="text" id="cardholderName" formControlName="cardholderName">
-      <div *ngIf="cardForm.controls['cardholderName'].invalid && (cardForm.controls['cardholderName'].dirty || cardForm.controls['cardholderName'].touched)">
-        <div *ngIf="cardForm.controls['cardholderName'].errors['required']">Cardholder name is required.</div>
-      </div>
-      
-      <!-- Expiration date input using Angular Material date picker -->
-      <mat-form-field>
-        <label for="expirationDate">Expiration Date:</label>
-        <input matInput [matDatepicker]="expirationPicker" formControlName="expirationDate">
-        <mat-datepicker-toggle matSuffix [for]="expirationPicker"></mat-datepicker-toggle>
-        <mat-datepicker #expirationPicker></mat-datepicker>
-        <mat-error *ngIf="cardForm.controls['expirationDate'].invalid && (cardForm.controls['expirationDate'].dirty || cardForm.controls['expirationDate'].touched)">
-          <div *ngIf="cardForm.controls['expirationDate'].errors['required']">Expiration date is required.</div>
-        </mat-error>
-      </mat-form-field>
-  
+      <!-- Other form controls for cardholder name, expiration date, etc. --><br>
+       <!-- Cardholder name input -->
+    <label for="cardholderName">Cardholder Name:</label>
+    <input type="text" id="cardholderName" formControlName="cardholderName">
+    <div *ngIf="cardForm.controls['cardholderName'].invalid && (cardForm.controls['cardholderName'].dirty || cardForm.controls['cardholderName'].touched)">
+      <div *ngIf="cardForm.controls['cardholderName'].errors['required']">Cardholder name is required.</div>
+    </div>
+    <br>
+    <!-- Expiration date input -->
+    <label for="expirationDate">Expiration Date:</label>
+    <input type="date" id="expirationDate" formControlName="expirationDate">
+    <div *ngIf="cardForm.controls['expirationDate'].invalid && (cardForm.controls['expirationDate'].dirty || cardForm.controls['expirationDate'].touched)">
+      <div *ngIf="cardForm.controls['expirationDate'].errors['required']">Expiration date is required.</div>
+    </div>
       <!-- Submit button -->
       <button type="submit" [disabled]="cardForm.invalid">Add Card</button>
     </form>

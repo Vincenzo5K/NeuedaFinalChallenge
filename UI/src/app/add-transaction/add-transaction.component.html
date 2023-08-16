@@ -1,0 +1,46 @@
+<div class="transaction-form">
+    <h2>Add Transaction</h2>
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+      <label for="transactionId">Transaction ID:</label>
+      <input type="text" id="transactionId" formControlName="transactionId">
+      <div *ngIf="transactionForm.controls['transactionId'].invalid && (transactionForm.controls['transactionId'].dirty || transactionForm.controls['transactionId'].touched)">
+        <div *ngIf="transactionForm.controls['transactionId'].errors['required']">Transaction ID is required.</div>
+      </div>
+      
+      <label for="transactionDateTime">Transaction Date and Time:</label>
+      <input type="datetime-local" id="transactionDateTime" formControlName="transactionDateTime">
+      <div *ngIf="transactionForm.controls['transactionDateTime'].invalid && (transactionForm.controls['transactionDateTime'].dirty || transactionForm.controls['transactionDateTime'].touched)">
+        <div *ngIf="transactionForm.controls['transactionDateTime'].errors['required']">Transaction Date and Time is required.</div>
+      </div>
+      
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" formControlName="amount">
+      <div *ngIf="transactionForm.controls['amount'].invalid && (transactionForm.controls['amount'].dirty || transactionForm.controls['amount'].touched)">
+        <div *ngIf="transactionForm.controls['amount'].errors['required']">Amount is required.</div>
+      </div>
+      
+      <label for="customerId">Customer ID:</label>
+      <input type="text" id="customerId" formControlName="customerId">
+      <div *ngIf="transactionForm.controls['customerId'].invalid && (transactionForm.controls['customerId'].dirty || transactionForm.controls['customerId'].touched)">
+        <div *ngIf="transactionForm.controls['customerId'].errors['required']">Customer ID is required.</div>
+      </div>
+      
+      <label for="merchant">Merchant:</label>
+      <input type="text" id="merchant" formControlName="merchant">
+      
+      <label for="category">Category:</label>
+      <input type="text" id="category" formControlName="category">
+      
+      <label for="city">City:</label>
+      <input type="text" id="city" formControlName="city">
+      
+      <label for="state">State:</label>
+      <input type="text" id="state" formControlName="state">
+      
+      <label for="cityPopulation">City Population:</label>
+      <input type="number" id="cityPopulation" formControlName="cityPopulation">
+      
+      <button type="submit" [disabled]="transactionForm.invalid">Add Transaction</button>
+    </form>
+  </div>
+  

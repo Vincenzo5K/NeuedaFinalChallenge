@@ -12,20 +12,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { DeleteCardComponent } from './delete-card/delete-card.component';
 import { CustomersComponent } from './customers/customers.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {HttpClientModule} from '@angular/common/http';
+import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { DeleteCustomerComponent } from './delete-customer/delete-customer.component';
+import { AddTransactionComponent } from './add-transaction/add-transaction.component';
+import { DeleteTransactionComponent } from './delete-transaction/delete-transaction.component'
 
 const routes: Routes = [
-  { path: 'list', component: CardListComponent },
-  { path: 'add', component: AddCardComponent },
+  { path: 'card-list', component: CardListComponent },
+  { path: 'add-card', component: AddCardComponent },
   { path: 'edit', component: EditCardComponent },
-  { path: 'delete', component: DeleteCardComponent },
-  { path: 'customer', component: CustomersComponent },
-  { path: 'transaction', component: TransactionsComponent }
-
+  { path: 'delete-card', component: DeleteCardComponent },
+  { path: 'customer-list', component: CustomersComponent },
+  { path: 'transaction', component: TransactionsComponent },
+  { path: 'add-customer', component: AddCustomerComponent },
+  { path: 'delete-customer', component: DeleteCustomerComponent },
+  { path: 'add-transaction', component: AddTransactionComponent },
+  { path: 'delete-transaction', component: DeleteTransactionComponent },
 ];
 @NgModule({
   declarations: [
@@ -39,10 +42,11 @@ const routes: Routes = [
     DeleteCardComponent,
     CustomersComponent,
     TransactionsComponent,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+    AddCustomerComponent,
+    DeleteCustomerComponent,
+    AddTransactionComponent,
+    DeleteTransactionComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes), 
     FormsModule,
-     
+    HttpClientModule
   ],
   exports: [
     RouterModule, 

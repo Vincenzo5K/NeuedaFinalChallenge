@@ -1,0 +1,38 @@
+<div class="customer-form">
+    <h2>Add Customer</h2>
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <label for="customerId">Customer ID:</label>
+      <input type="text" id="customerId" formControlName="customerId">
+      <div *ngIf="customerForm.controls['customerId'].invalid && (customerForm.controls['customerId'].dirty || customerForm.controls['customerId'].touched)">
+        <div *ngIf="customerForm.controls['customerId'].errors['required']">Customer ID is required.</div>
+      </div>
+      
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" formControlName="firstName">
+      <div *ngIf="customerForm.controls['firstName'].invalid && (customerForm.controls['firstName'].dirty || customerForm.controls['firstName'].touched)">
+        <div *ngIf="customerForm.controls['firstName'].errors['required']">First Name is required.</div>
+      </div>
+      
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" formControlName="lastName">
+      <div *ngIf="customerForm.controls['lastName'].invalid && (customerForm.controls['lastName'].dirty || customerForm.controls['lastName'].touched)">
+        <div *ngIf="customerForm.controls['lastName'].errors['required']">Last Name is required.</div>
+      </div>
+      
+      <label for="gender">Gender:</label>
+      <select id="gender" formControlName="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      
+      <label for="job">Job:</label>
+      <input type="text" id="job" formControlName="job">
+      
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="date" id="dateOfBirth" formControlName="dateOfBirth">
+      
+      <button type="submit" [disabled]="customerForm.invalid">Add Customer</button>
+    </form>
+  </div>
+  

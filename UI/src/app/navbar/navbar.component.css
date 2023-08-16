@@ -22,3 +22,53 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
   
+  /* styles.css */
+
+/* Style the navigation bar */
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  /* background-color: #333; */
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+/* Style the dropdown button */
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  display: inline-block;
+}
+
+/* Style the dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #000000;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Show the dropdown content when the dropdown button is hovered */
+.dropdown:hover .dropdown-content {
+  display: block;
+}

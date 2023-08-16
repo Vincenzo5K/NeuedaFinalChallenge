@@ -1,8 +1,37 @@
 <nav class="navbar">
-    <button class="nav-button" routerLink="/list">Card List</button>
+    <!-- <button class="nav-button" routerLink="/list">Card List</button>
     <button class="nav-button" routerLink="/add">Add Card</button>
     <button class="nav-button" routerLink="/delete">Delete Card</button>
     <button class="nav-button" routerLink="/customer">Customers</button>
     <button class="nav-button" routerLink="/transaction">Transactions</button>
+   -->
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Cards</a>
+                <div class="dropdown-content">
+                    <a routerLink="/add-card">Add Card</a>
+                    <a routerLink="/delete-card">Delete Card</a>
+                    <a routerLink="/card-list">Card List</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Customer</a>
+                <div class="dropdown-content">
+                    <a routerLink="/add-customer">Add Customer</a>
+                    <a routerLink="/delete-customer">Delete Customer</a>
+                    <a routerLink="/customer-list">Customer List</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Transaction</a>
+                <div class="dropdown-content">
+                    <a routerLink="/add-transaction">Add Transaction</a>
+                    <a routerLink="/delete-transaction">Delete Transaction</a>
+                    <a routerLink="/transaction">Transaction List</a>
+                </div>
+            </li>
+        </ul>
+    
 </nav>
   
