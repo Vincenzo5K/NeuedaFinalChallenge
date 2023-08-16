@@ -16,7 +16,10 @@ import {HttpClientModule} from '@angular/common/http';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { DeleteCustomerComponent } from './delete-customer/delete-customer.component';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
-import { DeleteTransactionComponent } from './delete-transaction/delete-transaction.component'
+import { DeleteTransactionComponent } from './delete-transaction/delete-transaction.component';
+import { SpendingHistoryComponent } from './spending-history/spending-history.component'
+import { NgChartsModule } from 'ng2-charts';
+
 
 const routes: Routes = [
   { path: 'card-list', component: CardListComponent },
@@ -29,6 +32,7 @@ const routes: Routes = [
   { path: 'delete-customer', component: DeleteCustomerComponent },
   { path: 'add-transaction', component: AddTransactionComponent },
   { path: 'delete-transaction', component: DeleteTransactionComponent },
+  { path: 'spending-history', component: SpendingHistoryComponent }
 ];
 @NgModule({
   declarations: [
@@ -46,6 +50,7 @@ const routes: Routes = [
     DeleteCustomerComponent,
     AddTransactionComponent,
     DeleteTransactionComponent,
+    SpendingHistoryComponent,
     
   ],
   imports: [
@@ -54,7 +59,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes), 
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule,
   ],
   exports: [
     RouterModule, 
