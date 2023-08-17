@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from '../customer-api.service';
+import { Customer } from './models/customer';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
@@ -11,13 +13,14 @@ export class CustomersComponent implements OnInit {
 
   // constructor() { } 
 
-  customers: any[]=[];
+  customers$!: Observable<Customer[]>;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.apiService.getData().subscribe(data => {
-      this.customers = data;
+    this.apiService.getCustomerData().subscribe(data => {
+      console.warn(typeof data)
+      this.customers =data;
     });
   }
 }

@@ -36,6 +36,10 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
     });
   }
 
+  getLowerHigher(): void{
+    
+  }
+
   generateChart(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const selectedValue = target.value;
