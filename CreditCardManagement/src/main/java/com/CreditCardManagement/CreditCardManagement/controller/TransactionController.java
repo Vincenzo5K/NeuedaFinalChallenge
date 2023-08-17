@@ -1,5 +1,8 @@
 package com.CreditCardManagement.CreditCardManagement.controller;
 
+import com.CreditCardManagement.CreditCardManagement.dto.CategorySpend;
+import com.CreditCardManagement.CreditCardManagement.dto.LowHigh;
+import com.CreditCardManagement.CreditCardManagement.dto.StateSales;
 import com.CreditCardManagement.CreditCardManagement.exception.CustomerNotFoundException;
 import com.CreditCardManagement.CreditCardManagement.exception.TransactionNotFoundException;
 import com.CreditCardManagement.CreditCardManagement.model.Customer;
@@ -157,5 +160,21 @@ public class TransactionController {
             @PathVariable double minAmount,
             @PathVariable double maxAmount) {
         return transactionService.getTransactionsByAmountRange(minAmount, maxAmount);
+    }
+
+    /////
+    @GetMapping("/transactions/transactionTotalsByState")
+    public List<StateSales> getTransactionTotalsByState() {
+        return transactionService.getTransactionTotalsByState();
+    }
+
+    @GetMapping("/transactions/CategorySpendByState/{state}")
+    public List<CategorySpend> getCategorySpendByState(@PathVariable String state) {
+        return transactionService.getCategorySpendByState(state);
+    }
+
+    @GetMapping("/transactions/LowHighTransactionTotals/{amount}")
+    public List<LowHigh> getLowHighTransactionTotals(@PathVariable double amount) {
+        return transactionService.getLowHighTransactionTotals(amount);
     }
 }

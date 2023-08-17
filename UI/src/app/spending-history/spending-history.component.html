@@ -1,22 +1,20 @@
-<div>
-    <h2 >Spending Habits of Customers</h2>
-</div>
-<div class="spending-dropdown">
-    <select (change)="generateChart($event)">
-        <option value="gender">By Gender</option>
-        <option value="category">By Category</option>
-        <option value="merchant">By Merchant</option>
-        <option value="city">By City</option>
-        <option value="state">By State</option>
-      </select>
-</div> <br> 
-<div>
-    <input type="text" id="filterTextbox" name="filterTextbox">
-    <br>
-    <!-- Add a button to apply the filter -->
-    <button (click)="getLowerHigher()">Lower and Higher</button>
-</div>
-<br> <br>
+
 <div class="spending-history">
-    <canvas id="myChart" #pieChartCanvas></canvas>
+        <h2 >SPENDING HISTORY</h2>
+    <div class="spending-dropdown">
+        <select (change)="generateChart($event)">
+            <option value="gender">By Gender</option>
+            <option value="category">By Category</option>
+            <option value="merchant">By Merchant</option>
+            <option value="city">By City</option>
+            <option value="state">By State</option>
+          </select> <br><br>
+          <input type="text" id="filterTextbox" name="filterTextbox">
+          <br>
+          <!-- Add a button to apply the filter -->
+          <button (click)="getLowerHigher()">Lower and Higher</button>
+    </div>
+    <section class="canvas">
+        <canvas id="myChart" #pieChartCanvas></canvas>
+    </section>
 </div>

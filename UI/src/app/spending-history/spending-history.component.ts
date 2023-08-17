@@ -8,8 +8,12 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
   @ViewChild('pieChartCanvas') private pieChartCanvasRef: ElementRef;
   private pieChart: Chart<"pie", any[], unknown> | undefined;
-
-  
+  lh: number;
+  inputElement:HTMLInputElement;
+  amount: number[]=[10,20,30,40,50,60,70,80,90,100];
+  lower: number=0;
+  higher: number=0;
+ 
   ngAfterViewInit(): void {
     this.createInitialChart();
   }
@@ -37,7 +41,45 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
   }
 
   getLowerHigher(): void{
-    
+    this.inputElement = document.getElementById("filterTextbox") as HTMLInputElement;
+    this.lh=parseInt(this.inputElement.value,10);
+    this.lower=0;
+    this.higher=0;
+    this.amount.forEach((element, index) => {
+      if(element<=this.lh)
+        this.lower++;
+      else
+        this.higher++;
+    })
+
+    this.generateHigherLowerChart();
+
+  
+  }
+
+  generateHigherLowerChart(): void{
+    if (Chart.getChart("myChart")){
+      Chart.getChart("myChart").destroy();
+    }
+
+
+
+    const pieChartCanvas = this.pieChartCanvasRef.nativeElement.getContext('2d');
+    const data = this.getChartDataForSelection("lowerhigher");
+
+    this.pieChart = new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: {
+        labels: data.labels,
+        datasets: [{
+          data: data.data,
+          backgroundColor: data.backgroundColor
+        }]
+      },
+      options: {
+        responsive: true,
+      }
+    });
   }
 
   generateChart(event: Event): void {
@@ -101,6 +143,13 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
           data: [100, 200, 300],
           backgroundColor: ['#FF6384', '#36A2EB']
         };
+        case 'lowerhigher':
+          return {
+
+            labels: ['Lower', 'Higher'],
+            data: [this.lower,this.higher],
+            backgroundColor: ['#FF6384', '#36A2EB']
+          };
       // Add more cases for other selections
       default:
         return {

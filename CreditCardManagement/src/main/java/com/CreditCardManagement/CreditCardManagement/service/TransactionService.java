@@ -1,7 +1,11 @@
 package com.CreditCardManagement.CreditCardManagement.service;
 
+import com.CreditCardManagement.CreditCardManagement.dto.CategorySpend;
+import com.CreditCardManagement.CreditCardManagement.dto.LowHigh;
+import com.CreditCardManagement.CreditCardManagement.dto.StateSales;
 import com.CreditCardManagement.CreditCardManagement.exception.TransactionNotFoundException;
 import com.CreditCardManagement.CreditCardManagement.model.Transaction;
+import com.CreditCardManagement.CreditCardManagement.repo.TransactionDALMongoTemplate;
 import com.CreditCardManagement.CreditCardManagement.repo.TransactionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,9 @@ public class TransactionService implements ITransactionService {
 
     @Autowired
     private TransactionRepo transactionRepo;
+
+    @Autowired
+    private TransactionDALMongoTemplate transactionDALMongoTemplate;
 
 //    private CustomerService customerService;
 
@@ -126,5 +133,18 @@ public class TransactionService implements ITransactionService {
     @Override
     public List<Transaction> getTransactionsByAmountRange(double minAmount, double maxAmount) {
         return transactionRepo.findByAmountRange(minAmount, maxAmount);
+    }
+
+    ///
+    public List<StateSales> getTransactionTotalsByState() {
+        return transactionDALMongoTemplate.getTransactionTotalsByState();
+    }
+
+    public List<CategorySpend> getCategorySpendByState(String state) {
+        return transactionDALMongoTemplate.getCategorySpendByState(state);
+    }
+
+    public List<LowHigh> getLowHighTransactionTotals(double amount) {
+        return transactionDALMongoTemplate.getLowHighTransactionTotals(amount);
     }
 }
