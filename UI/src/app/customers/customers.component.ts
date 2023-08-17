@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
-  customers: any[] = [ { id: 1, firstName: 'John', lastName: 'Doe', gender: 'Male', job: 'Engineer', dateOfBirth: '1990-01-15' },
-  { id: 2, firstName: 'Jane', lastName: 'Smith', gender: 'Female', job: 'Designer', dateOfBirth: '1985-08-22' },]; // Replace with actual customer data
+  // customers: any[] = [ { id: 1, firstName: 'John', lastName: 'Doe', gender: 'Male', job: 'Engineer', dateOfBirth: '1990-01-15' },
+  // { id: 2, firstName: 'Jane', lastName: 'Smith', gender: 'Female', job: 'Designer', dateOfBirth: '1985-08-22' },]; // Replace with actual customer data
 
   // constructor() { } 
 
@@ -28,8 +28,8 @@ export class CustomersComponent implements OnInit {
     //   this.customers$ =data;
     // });
     this.customers$ = this.customerService.getCustomerData();
-    console.warn(this.customers$)
-  }
+    console.warn(this.customers$)  
 }
 
 
+}

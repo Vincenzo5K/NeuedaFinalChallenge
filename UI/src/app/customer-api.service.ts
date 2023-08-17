@@ -6,7 +6,8 @@ import { Customer } from './models/customer';
   providedIn: 'root'
 })
 export class CustomerApiService {
-  apiUrl= 'http://localhost:8080/customers';
+  apiUrl: string;
+ 
   // Replace with your API URL
   httpOptions = {
     headers: new HttpHeaders({
@@ -14,7 +15,7 @@ export class CustomerApiService {
     })
   };
   constructor(private http: HttpClient) {
-    
+    this.apiUrl= 'http://localhost:8080/customers';
   }
 
   getCustomerData(): Observable<Customer[]> {
