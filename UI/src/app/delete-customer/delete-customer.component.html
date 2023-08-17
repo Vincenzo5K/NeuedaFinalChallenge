@@ -1,0 +1,16 @@
+<div class="customer-form">
+    <h2>DELETE CUSTOMER</h2>
+    <form class="customerForm" [formGroup]="customerForm" (ngSubmit)="onDelete()">
+      <div class="row" style="font-weight:bold; font-size: large;">
+        <label for="customerId">Customer ID:</label>
+        <input type="text" id="customerId" formControlName="customerId">
+        <div *ngIf="customerForm.controls['customerId'].invalid && (customerForm.controls['customerId'].dirty || customerForm.controls['customerId'].touched)">
+          <div class="error" *ngIf="customerForm.controls['customerId'].errors['required']">Customer ID is required.</div>
+        </div>
+      </div>
+     
+      
+      <button type="submit" [disabled]="customerForm.invalid">Delete Customer</button>
+    </form>
+  </div>
+  

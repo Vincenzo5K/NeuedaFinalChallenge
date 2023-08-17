@@ -1,0 +1,16 @@
+
+<div class="spending-history">
+        <h2 >SPENDING HISTORY</h2>
+    <div class="spending-dropdown">
+        <select (change)="generateChart($event)">
+            <option value="gender">By Gender</option>
+            <option value="category">By Category</option>
+            <option value="merchant">By Merchant</option>
+            <option value="city">By City</option>
+            <option value="state">By State</option>
+          </select>
+    </div>
+    <section class="canvas">
+        <canvas id="myChart" #pieChartCanvas></canvas>
+    </section>
+</div>

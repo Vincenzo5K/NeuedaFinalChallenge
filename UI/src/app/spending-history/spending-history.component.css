@@ -1,0 +1,29 @@
+h2 {
+  margin: 0;
+  line-height: normal;
+  font-size: 20px;
+  text-align: center;
+  color: rgb(12, 97, 194);
+}
+.spending-history {
+  width: 70%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+    align-items: center;
+    color:black;
+    gap: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+section.canvas {
+  width: 40%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,112 @@
+<div class="transaction-form">
+    <h2>ADD TRANSACTION</h2>
+    <form class="transactionForm" [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+      
+      <table>
+        <tr>
+          <td style="font-weight: bold;">
+            <label for="transactionId">Transaction ID:</label>
+
+          </td>
+          <td>
+            <input type="text" id="transactionId" formControlName="transactionId">
+            <div *ngIf="transactionForm.controls['transactionId'].invalid && (transactionForm.controls['transactionId'].dirty || transactionForm.controls['transactionId'].touched)">
+              <div *ngIf="transactionForm.controls['transactionId'].errors['required']">Transaction ID is required.</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="transactionDateTime">Transaction Date and Time:</label>
+
+          </td>
+          <td>
+            <input type="datetime-local" id="transactionDateTime" formControlName="transactionDateTime">
+            <div *ngIf="transactionForm.controls['transactionDateTime'].invalid && (transactionForm.controls['transactionDateTime'].dirty || transactionForm.controls['transactionDateTime'].touched)">
+              <div *ngIf="transactionForm.controls['transactionDateTime'].errors['required']">Transaction Date and Time is required.</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="amount">Amount:</label>
+
+          </td>
+          <td>
+              <input type="number" id="amount" formControlName="amount">
+              <div *ngIf="transactionForm.controls['amount'].invalid && (transactionForm.controls['amount'].dirty || transactionForm.controls['amount'].touched)">
+                <div *ngIf="transactionForm.controls['amount'].errors['required']">Amount is required.</div>
+              </div> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="customerId">Customer ID:</label>
+
+          </td>
+          <td>
+              <input type="text" id="customerId" formControlName="customerId">
+              <div *ngIf="transactionForm.controls['customerId'].invalid && (transactionForm.controls['customerId'].dirty || transactionForm.controls['customerId'].touched)">
+                <div *ngIf="transactionForm.controls['customerId'].errors['required']">Customer ID is required.</div>
+              </div> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <label for="merchant">Merchant:</label>
+          </td>
+          <td>
+            <input type="text" id="merchant" formControlName="merchant">
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <label for="category">Category:</label>
+          </td>
+          <td>
+            <input type="text" id="category" formControlName="category">
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <label for="city">City:</label>
+            
+          </td>
+          <td>
+            <input type="text" id="city" formControlName="city">
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <label for="state">State:</label>
+          </td>
+          <td>
+            <input type="text" id="state" formControlName="state">
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <label for="cityPopulation">City Population:</label>
+          </td>
+          <td>
+            <input type="number" id="cityPopulation" formControlName="cityPopulation">
+
+          </td>
+        </tr>
+        <tr>
+    
+          <td colspan="2" style="text-align: center;">
+            <button type="submit" [disabled]="transactionForm.invalid">Add Transaction</button>
+          </td>
+        </tr>
+      </table>
+      
+      
+      
+    </form>
+  </div>
+  

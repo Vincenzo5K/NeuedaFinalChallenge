@@ -1,0 +1,16 @@
+<div class="transaction-form">
+    <h2>DELETE TRANSACTION</h2>
+    <form class="transactionForm" [formGroup]="transactionForm" (ngSubmit)="onDelete()">
+      <div class="row">
+        <label for="transactionId">Transaction ID:</label>
+        <input type="text" id="transactionId" formControlName="transactionId">
+        <div *ngIf="transactionForm.controls['transactionId'].invalid && (transactionForm.controls['transactionId'].dirty || transactionForm.controls['transactionId'].touched)">
+          <div *ngIf="transactionForm.controls['transactionId'].errors['required']">Transaction ID is required.</div>
+        </div>
+      </div>
+      
+      
+      <button type="submit" [disabled]="transactionForm.invalid">Delete Transaction</button>
+    </form>
+  </div>
+  

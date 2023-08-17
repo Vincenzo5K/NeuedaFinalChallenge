@@ -1,0 +1,85 @@
+<div class="customer-form">  
+  <h2>
+    <p class="head-border">Please fill the details to add the Customer Data</p>
+  </h2>
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <table>
+      <tr>
+        <td colspan="4">
+          <div class="row" style="font-weight:bold; font-size: large;">
+            <label for="customerId">Customer ID:</label>
+            <input type="text" id="customerId" formControlName="customerId">
+            <div
+              *ngIf="customerForm.controls['customerId'].invalid && (customerForm.controls['customerId'].dirty || customerForm.controls['customerId'].touched)">
+              <div class="error" *ngIf="customerForm.controls['customerId'].errors['required']">Customer ID is required.
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="row">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" formControlName="firstName">
+            <div
+              *ngIf="customerForm.controls['firstName'].invalid && (customerForm.controls['firstName'].dirty || customerForm.controls['firstName'].touched)">
+              <div class="error" *ngIf="customerForm.controls['firstName'].errors['required']">First Name is required.
+              </div>
+            </div>
+          </div>
+        </td>
+
+        <td colspan="2">
+          <div class="row">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" formControlName="lastName">
+            <div
+              *ngIf="customerForm.controls['lastName'].invalid && (customerForm.controls['lastName'].dirty || customerForm.controls['lastName'].touched)">
+              <div class="error" *ngIf="customerForm.controls['lastName'].errors['required']">Last Name is required.
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="row">
+            <label for="gender">Gender:</label>
+            <select id="gender" formControlName="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </td>
+
+        <td colspan="2">
+          <div class="row">
+            <label for="job">Job:</label>
+            <input type="text" id="job" formControlName="job">
+          </div>
+        </td>
+
+        <td>
+          <div class="row">
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" id="dateOfBirth" formControlName="dateOfBirth">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <div class="row">
+            <button type="submit" [disabled]="customerForm.invalid">Add Customer</button>
+          </div>
+
+        </td>
+
+      </tr>
+
+    </table>
+
+
+  </form>
+</div>
