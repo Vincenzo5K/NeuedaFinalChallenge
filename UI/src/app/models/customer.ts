@@ -1,6 +1,6 @@
 export class Customer {
     id!:string
-    customeId!: string;
+    customerId!: string;
     first!: string;
     last!: string;
     gender!: string;

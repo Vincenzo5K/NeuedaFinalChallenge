@@ -22,17 +22,17 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/customers")
-    public ResponseEntity <?> getAllCustomer() {
+    public List<Customer> getAllCustomer() {
         Map<StatusMessages, String> map = new HashMap<>();
         try {
             List<Customer> customers = customerService.getAllCustomers();
             map.put(StatusMessages.SUCCESS, "All customers retrieved successfully");
             CustomerAPIResponse response = new CustomerAPIResponse(map, customers);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+            return customers;
         } catch (Exception e) {
             System.out.println("Error retrieving customers: " + e.getMessage());
             map.put(StatusMessages.FAILURE, "Error retrieving customers: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+            return null;
         }
     }
 
