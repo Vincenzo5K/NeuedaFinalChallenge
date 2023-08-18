@@ -3,6 +3,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import { Observable} from 'rxjs';
 import { ApiService } from '../api.service';
 import { LowHigh } from '../models/LowHigh';
+import { ByState } from '../models/ByState';
 @Component({
   selector: 'app-spending-history',
   templateUrl: './spending-history.component.html',
@@ -16,7 +17,12 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
   amount: number[]=[10,20,30,40,50,60,70,80,90,100];
   lower: number=0;
   higher: number=0;
+  state:string;
+  byState:Observable<ByState[]>;
   lowhigh!: Observable<LowHigh[]>;
+  state_labels:string[]=[];
+  state_data:number[]=[];
+  state_backgroundColor:string[]=["#FF6384","#406384","#506384","#FC6384","#706384","#806384","#AF6384","#BF6384","#906384","#CF6384","#DF6384","#906384","#A06384","#106384",];
   ngAfterViewInit(): void {
     this.createInitialChart();
   }
@@ -54,6 +60,31 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
     console.log('End');
   }
   
+  getStateChart():void{
+    this.inputElement = document.getElementById("filterByState") as HTMLInputElement;
+    this.state=this.inputElement.value;
+    this.byState = this.transactionService.getByState(this.state);
+  
+    this.byState.subscribe(
+      (items: ByState[]) => {
+        // Access properties of each item in the array
+        for (const item of items) {
+          console.log(item.category)
+          console.log(item.total_spend)
+          this.state_labels.push(item.category);
+          this.state_data.push(item.total_spend);
+          
+        
+        }
+      },
+      (error) => {
+        console.error('Error:', error);
+        // Handle the error here
+      }
+    );
+
+    this.generateActualStateChart();
+  }
 
   getLowerHigher(): void{
     this.inputElement = document.getElementById("filterTextbox") as HTMLInputElement;
@@ -93,6 +124,31 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
     this.example()
 
   
+  }
+
+  generateActualStateChart(): void{
+    if (Chart.getChart("myChart")){
+      Chart.getChart("myChart").destroy();
+    }
+
+
+
+    const pieChartCanvas = this.pieChartCanvasRef.nativeElement.getContext('2d');
+    const data = {labels:this.state_labels, data:this.state_data, backgroundColor: this.state_backgroundColor};
+
+    this.pieChart = new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: {
+        labels: data.labels,
+        datasets: [{
+          data: data.data,
+          backgroundColor: data.backgroundColor
+        }]
+      },
+      options: {
+        responsive: true,
+      }
+    });
   }
 
   generateHigherLowerChart(): void{
@@ -190,6 +246,12 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
             data: [this.lower,this.higher],
             backgroundColor: ['#FF6384', '#36A2EB']
           };
+          case 'bystate':
+            return {
+              state_labels:[],
+              state_data:[],
+              state_backgroundColor:[],
+            };
       // Add more cases for other selections
       default:
         return {

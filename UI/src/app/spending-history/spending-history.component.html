@@ -8,7 +8,13 @@
             <option value="merchant">By Merchant</option>
             <option value="city">By City</option>
             <option value="state">By State</option>
-          </select> <br><br>
+          </select> 
+          <br><br>
+          <input type="text" id="filterByState" name="filterByState">
+          <br>
+          <!-- Add a button to apply the filter -->
+          <button (click)="getStateChart()">Get By State</button>
+          <br><br>
           <input type="text" id="filterTextbox" name="filterTextbox">
           <br>
           <!-- Add a button to apply the filter -->
