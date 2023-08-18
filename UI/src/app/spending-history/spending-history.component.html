@@ -13,6 +13,15 @@
           <br>
           <!-- Add a button to apply the filter -->
           <button (click)="getLowerHigher()">Lower and Higher</button>
+        <table>
+            <tbody>
+            <tr *ngFor="let item of (lowhigh | async)">
+                <td>{{ item.lowHigh }}</td>
+                <td>{{ item.transTotal }}</td>
+              </tr>
+          </tbody>
+        </table>
+          
     </div>
     <section class="canvas">
         <canvas id="myChart" #pieChartCanvas></canvas>

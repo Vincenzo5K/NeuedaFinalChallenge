@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Customer } from './models/customer';
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class CustomerApiService {
   }
 
   getCustomerData(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.apiUrl);
+    return this.http.get<Customer[]>(this.apiUrl)
   }
 
   addCustomer(customer:Customer): Observable<Customer> {

@@ -1,5 +1,8 @@
 import { ChartOptions, ChartType, Chart  } from 'chart.js';
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Observable} from 'rxjs';
+import { ApiService } from '../api.service';
+import { LowHigh } from '../models/LowHigh';
 @Component({
   selector: 'app-spending-history',
   templateUrl: './spending-history.component.html',
@@ -8,17 +11,17 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
   @ViewChild('pieChartCanvas') private pieChartCanvasRef: ElementRef;
   private pieChart: Chart<"pie", any[], unknown> | undefined;
-  lh: number;
+  lh: string;
   inputElement:HTMLInputElement;
   amount: number[]=[10,20,30,40,50,60,70,80,90,100];
   lower: number=0;
   higher: number=0;
- 
+  lowhigh!: Observable<LowHigh[]>;
   ngAfterViewInit(): void {
     this.createInitialChart();
   }
 
-  constructor() { }
+  constructor(private transactionService: ApiService) { }
 
   ngOnInit(): void {
   }
@@ -40,19 +43,54 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
     });
   }
 
+  delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+    
+  async example() {
+    console.log('Start');
+    await this.delay(7000); // Delay for 2000 milliseconds (2 seconds)
+    this.generateHigherLowerChart();
+    console.log('End');
+  }
+  
+
   getLowerHigher(): void{
     this.inputElement = document.getElementById("filterTextbox") as HTMLInputElement;
-    this.lh=parseInt(this.inputElement.value,10);
+    this.lh=this.inputElement.value,10;
     this.lower=0;
     this.higher=0;
-    this.amount.forEach((element, index) => {
-      if(element<=this.lh)
-        this.lower++;
-      else
-        this.higher++;
-    })
+    // this.amount.forEach((element, index) => {
+    //   if(element<=this.lh)
+    //     this.lower++;
+    //   else
+    //     this.higher++;
+    // })
 
-    this.generateHigherLowerChart();
+    this.lowhigh = this.transactionService.getLowHighData(this.lh);
+    console.warn(this.lowhigh)
+
+    this.lowhigh.subscribe(
+      (items: LowHigh[]) => {
+        // Access properties of each item in the array
+        for (const item of items) {
+          console.log('lowHigh:', item.lowHigh);
+          console.log('transTotal:', item.transTotal);
+          
+          if(item.lowHigh=="Low Amounts")
+            this.lower=item.transTotal;
+          else if(item.lowHigh=="High Amounts")
+            this.higher=item.transTotal;
+        }
+      },
+      (error) => {
+        console.error('Error:', error);
+        // Handle the error here
+      }
+    );
+
+    //this.generateHigherLowerChart();
+    this.example()
 
   
   }
@@ -144,6 +182,8 @@ export class SpendingHistoryComponent implements OnInit, AfterViewInit  {
           backgroundColor: ['#FF6384', '#36A2EB']
         };
         case 'lowerhigher':
+          console.log(this.lower)
+          console.log(this.higher)
           return {
 
             labels: ['Lower', 'Higher'],
